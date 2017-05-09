@@ -1,0 +1,86 @@
+* {
+    /* For some reason, there are scaling problems in Google chrome... */
+    font-size: 100% !important;
+    font-family: Roboto, sans-serif;
+}
+.top-btn {
+    min-width: 40px;
+    margin: 0;
+}
+.close-btn {
+    background-color: #FF4336 !important;
+}
+.open-new-btn {
+    background-color: #4CAF50 !important;
+}
+.github-btn {
+    background-color: #FF9800 !important;
+}
+.top-btns {
+    border-bottom: 1px black solid;
+    display: flex;
+}
+table {
+    border: 3px solid black;
+}
+td:not(:nth-child(5)) {
+    border-bottom: 2px solid red;
+    border-right: 2px solid red;
+}
+td:nth-child(5) {
+    border-bottom: 2px solid red;
+}
+.checked {
+    background-color: gray;
+    text-decoration: line-through;
+    color: white;
+}
+[flex]:not(.overwrite-width) {
+    width: 100%;
+}
+.actions {
+    border: 2px red solid;
+}
+.disclaimer.note {
+    background-color: #ddffdd;
+    border-left: 6px solid #4CAF50;
+    padding: 10px;
+}
+.optional {
+    color: blue;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

@@ -1,0 +1,9 @@
+# Extension files
+extension.crx
+extension.pem
+
+# Mac files
+.DS_Store
+
+# Visual Studio code
+.vscode/*

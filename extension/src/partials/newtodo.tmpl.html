@@ -1,0 +1,36 @@
+<md-dialog>
+    <form name="todoForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 class="md-display-2">New Todo</h2>
+                <span flex></span>
+                <md-button ng-click="close()" class="md-icon-button" aria-label="Close Dialog">
+                    <md-icon md-svg-icon="close" />
+                    <md-tooltip>Close</md-tooltip>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container flex>
+                    <input id="new-todo" ng-model="newTodo.newContent" required name="newContent" />
+                    <label>What do you need to do?</label>
+                    <div ng-messages="todoForm.newContent.$error">
+                        <div ng-message="required">This is required</div>
+                    </div>
+                </md-input-container>
+                <md-chips ng-model="newTodo.newTags" name="newTags" placeholder="Enter a tag..." md-separator-keys="chipKeys">
+                </md-chips>
+                <md-checkbox ng-model="newTodo.markAsComplete" name="markAsComplete">Mark As Complete</md-checkbox>
+                <md-select ng-model="newTodo.importance" name="importance" placeholder="Importance">
+                    <md-option ng-repeat="importanceOpt in importanceOpts" ng-value="importanceOpt.val">{{importanceOpt.text}}</md-option>
+                </md-select>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()" class="md-primary">Cancel</md-button>
+            <md-button type="reset" class="md-warn">Reset</md-button>
+            <md-button ng-click="add(newTodo)" class="md-primary" ng-disabled="todoForm.$invalid">Add</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

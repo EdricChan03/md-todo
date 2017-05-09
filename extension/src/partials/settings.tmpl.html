@@ -1,0 +1,80 @@
+<md-dialog>
+    <form ng-cloak name="settingsForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 class="md-title">Settings</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close dialog" ng-click="cancel()">
+                    <md-icon md-svg-icon="close"></md-icon>
+                    <md-tooltip md-position="left">Close</md-tooltip>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-tabs md-border-bottom md-dynamic-height>
+                    <md-tab label="General">
+                        <md-content class="md-padding">
+                            <h2>General Preferences</h2>
+                            <md-checkbox ng-model="settings.isDarkTheme">Enable Dark Mode</md-checkbox>
+                            <br>
+                            <md-checkbox ng-model="settings.openNewTab" class="md-primary">Open links in a new tab</md-checkbox>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Account">
+                        <md-content class="md-padding">
+                            <h2>Account Preferences</h2>
+                            <md-input-container class="md-block">
+                                <label>Name</label>
+                                <md-icon md-svg-icon="account"></md-icon>
+                                <input ng-model="settings.name" required name="name" minlength="3" />
+                                <div ng-messages="settingsForm.name.$error">
+                                    <div ng-message="required">This is required</div>
+                                    <div ng-message="minlength">This field must be at least 3 characters long</div>
+                                </div>
+                            </md-input-container>
+                            <div>
+                                <div class="disclaimer note">
+                                    <p>This will only be collected anonymously in order to send you an email when a todo item
+                                        is going to be due once per day. (It won't spam you)</p>
+                                    <span class="optional tooltip">[Optional]
+                                <span class="tooltiptext">You don't have to fill this up if you don't want to</span>
+                                    </span>
+                                </div>
+                                <md-input-container class="md-block">
+                                    <label>Email</label>
+                                    <md-icon md-svg-icon="email"></md-icon>
+                                    <input type="email" ng-model="settings.email" name="email" />
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Experimental">
+                        <md-content class="md-padding">
+                            <h2>Experimental Preferences</h2>
+
+                            <md-input-container class="md-block">
+                                <label>Duration of toasts in milliseconds</label>
+                                <md-icon md-svg-icon="clock"></md-icon>
+                                <input ng-model="settings.durationToasts">
+                            </md-input-container>
+                            <br />
+                            <md-select ng-model="settings.theme">
+                                <md-option value="indigo-pink" selected>Indigo-pink</md-option>
+                                <md-option value="blue-pink">Indigo-pink</md-option>
+                                <md-option value="yellow-green">Yellow-green</md-option>
+                            </md-select>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+                <p class="note">Please refresh your page to apply changes.</p>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-warn" ng-click="clearPrefs($event)">Clear Settings</md-button>
+            <span flex></span>
+            <md-button class="md-primary" ng-click="cancel()">Cancel</md-button>
+            <md-button class="md-primary md-raised" ng-click="answer(settings)" ng-disabled="settingsForm.$invalid">Save</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

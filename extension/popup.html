@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MdTodoApp" style="min-width:350px;" ng-cloak>
+
+<head>
+    <title>MdTodo App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Angular.js libraries-->
+    <script src="src/angular.js"></script>
+    <script src="src/angular-animate.min.js"></script>
+    <script src="src/angular-aria.min.js"></script>
+    <script src="src/angular-material.min.js"></script>
+    <link rel="stylesheet" href="src/angular-material.min.css">
+    <script src="src/angular-messages.min.js"></script>
+    <!--App.js-->
+    <script src="src/app.js"></script>
+    <script src="src/todoStorage.service.js"></script>
+    <script src="src/settingsStorage.service.js"></script>
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="src/fonts/fonts.css">
+</head>
+
+<body>
+    <div class="top-btns" ng-controller="ButtonsController">
+        <md-button ng-click="closeWindow()" class="top-btn close-btn">
+            <md-icon md-svg-icon="close" />
+            <md-tooltip>Close Window</md-tooltip>
+        </md-button>
+        <md-button ng-click="openNewTab()" class="top-btn open-new-btn">
+            <md-icon md-svg-icon="open-in-new" />
+            <md-tooltip>Open in New Tab</md-tooltip>
+        </md-button>
+        <md-button ng-click="viewGithub()" class="top-btn github-btn">
+            <md-icon md-svg-icon="github-circle" />
+            <md-tooltip>View on Github</md-tooltip>
+        </md-button>
+        <span flex></span>
+        <md-button ng-click="preferences($event)" class="top-btn settings-btn">
+            <md-icon md-svg-icon="settings" />
+            <md-tooltip>Settings</md-tooltip>
+        </md-button>
+    </div>
+    <md-content ng-controller="TodoController" layout="column" class="md-padding">
+        <p class="md-body-1">Welcome to the MdTodo App!</p>
+        <md-button ng-click="newTodo($event)" class="md-primary md-raised">New Todo</md-button>
+        <hr>
+        <div class="actions">
+            <md-button ng-click="removeAll($event)" class="md-warn md-raised" ng-disabled="checkTodo()">Clear All</md-button>
+            <md-button ng-click="removeSelected($event)" class="md-warn md-raised">Clear Selected</md-button>
+        </div>
+        <table style="width:100%;height:50%;" class="md-padding">
+            <tbody>
+                <th>
+                    <tr>
+                        <td class="md-subhead">Done</td>
+                        <td class="md-subhead">Todo</td>
+                        <td class="md-subhead">Tags</td>
+                        <td class="md-subhead">Importance</td>
+                        <td class="md-subhead">Actions</td>
+                    </tr>
+                </th>
+                <tr ng-repeat="todo in todoList track by todo.id" ng-class='{checked: todo.completed}'>
+                    <td>
+                        <md-checkbox ng-model="todo.completed" class="md-primary" style="margin:auto;width:50%;display:block;" ng-change="done()"></md-checkbox>
+                    </td>
+                    <td>
+                        <span class="md-body-1">{{todo.content}}</span>
+                    </td>
+                    <td>
+                        <md-chips ng-model="todo.tags" readonly="true"></md-chips>
+                    </td>
+                    <td>
+                        <span ng-if="todo.importance == 'high'">‼️</span>
+                        <span ng-if="todo.importance == 'med'">⁉️</span>
+                        <span ng-if="todo.importance == 'low'">❗</span>
+                    </td>
+                    <td>
+                        <md-button class="md-icon-button" ng-click="remove(todo)">
+                            <md-icon md-svg-icon="delete" />
+                            <md-tooltip>Remove</md-tooltip>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click="moveUp(todo)" ng-if="$index != 0">
+                            <md-icon md-svg-icon="chevron-up" />
+                            <md-tooltip>Move Up 1 Space</md-tooltip>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click="moveDown(todo)">
+                            <md-icon md-svg-icon="chevron-down" />
+                            <md-tooltip>Move Down 1 Space</md-tooltip>
+                        </md-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </md-content>
+</body>
+
+</html>
