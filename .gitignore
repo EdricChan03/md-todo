@@ -1,6 +1,7 @@
 # Extension files
 extension.crx
 extension.pem
+extension.zip
 
 # Mac files
 .DS_Store
